@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTTP POST Request</title>
+</head>
+<body>
+    <h1>HTTP POST Request Example</h1>
+    <button onclick="postData()">Send POST Request</button>
+    <div id="response"></div>
+    <div id="postResponse"></div>
+
+    <script>
+        fetch('/hello', {
+            method: 'GET',
+            headers:{
+                'Content-type': 'application/json'
+            }
+        })
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('response').textContent = data;
+        })
+
+        function postData() {
+            const data = {
+                field1: "Hello from the client!",
+                field2: 123
+            };
+
+            fetch('http://localhost:8080/test', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('postResponse').innerHTML = JSON.stringify(data, null, 2);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+    </script>
+</body>
+</html>
+
+
