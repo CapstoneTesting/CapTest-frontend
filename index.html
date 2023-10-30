@@ -10,17 +10,7 @@
     <div id="postResponse"></div>
 
     <script>
-        fetch('/hello', {
-            method: 'GET',
-            headers:{
-                'Content-type': 'application/json'
-            }
-        })
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('response').textContent = data;
-        })
-
+        
         function postData() {
             const data = {
                 field1: "Hello from the client!",
@@ -46,5 +36,3 @@
     </script>
 </body>
 </html>
-
-
