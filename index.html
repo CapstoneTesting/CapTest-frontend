@@ -1,38 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>HTTP POST Request</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple HTML Form</title>
 </head>
 <body>
-    <h1>HTTP POST Request Example</h1>
-    <button onclick="postData()">Send POST Request</button>
-    <div id="response"></div>
-    <div id="postResponse"></div>
+    <header>
+        <h1>POST Request Example</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>Send a POST Request</h2>
+            <form id="post-form">
+                <label for="message">Message:</label>
+                <input type="text" id="message" name="message" required>
+                <button type="submit">Send POST Request</button>
+            </form>
+
+            <div id="response"></div>
+        </section>
+    </main>
 
     <script>
-        
-        function postData() {
-            const data = {
-                field1: "Hello from the client!",
-                field2: 123
-            };
+        document.getElementById("post-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            const message = document.getElementById("message").value;
+            const requestData = { Message: message };
 
-            fetch('http://localhost:8080/test', {
+            fetch('http://my-backend-server:8080/echo', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify(requestData),
             })
             .then(response => response.json())
             .then(data => {
-                document.getElementById('postResponse').innerHTML = JSON.stringify(data, null, 2);
+                const responseDiv = document.getElementById("response");
+                responseDiv.textContent = "Response: " + data.message;
             })
             .catch(error => {
                 console.error('Error:', error);
             });
-        }
-
+        });
     </script>
 </body>
 </html>
