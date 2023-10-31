@@ -19,7 +19,7 @@
                 <button type="submit">Send POST Request</button>
             </form>
 
-            <div id="response"></div>
+            <div id="response" style="padding-top: 40px;"></div>
         </section>
     </main>
 
@@ -30,7 +30,7 @@
             const message = document.getElementById("message").value;
             const requestData = { Message: message };
 
-            fetch('http://my-backend-server:8080/echo', {
+            fetch('http://localhost:8080/echo', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
